@@ -4,17 +4,42 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
+import { TopBarComponent } from './top-bar/top-bar.component';
+import { SetupComponent } from './setup/setup.component';
+import { RoutesComponent } from './routes/routes.component';
+import {RouterModule} from "@angular/router";
+import {DigitransitService} from "./services/digitransit.service";
+
+const routeConfig = [
+  {
+    path: '',
+    pathMatch: 'full',
+    redirectTo: 'setup'
+  },
+  {
+    path: 'setup',
+    component: SetupComponent
+  },
+  {
+    path: 'routes',
+    component: RoutesComponent
+  }
+];
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    TopBarComponent,
+    SetupComponent,
+    RoutesComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    RouterModule.forRoot(routeConfig),
   ],
-  providers: [],
+  providers: [DigitransitService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
